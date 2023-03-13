@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+$primary: #DCAD21;
+$body-bg: rgb(40, 40, 40);
+$base-bg: rgb(50, 50, 50);
+$body-text: white;
+$component-border:rgba( #DCAD21, .3);
+$hovered-bg:#DCAD21;
+$selected-bg:#DCAD21;
+@import "./../node_modules/@progress/kendo-theme-default/dist/all.scss";
+
+body {
+    padding: 0%;
+    margin: 0%;
+    font-family: sans-serif;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    /* min-height: 100%; */
+}

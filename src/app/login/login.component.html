@@ -1,0 +1,20 @@
+<div class="login-bg"></div>
+<div class="login-form-bg">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="login-form">
+            <h1>FAT</h1>
+            <label class="label" for="userName">User name</label>
+            <input type="text" formControlName="userName" class="login-input" />
+            <label class="label" for="userName">Password</label>
+            <input type="password" formControlName="password" class="login-input" />
+            <button type="submit" class="login-button">
+                Login&nbsp;&nbsp;
+                <i *ngIf="loading" class="fa fa-spinner fa-pulse"></i>
+                <i *ngIf="!loading" class="fas fa-sign-in-alt"></i></button>
+            <div *ngIf="error" style="color: red;">{{ error }}</div>
+        </div>
+    </form>
+    <div class="login-footer">
+        Designed and developed by <a style="color: white;" href="https://www.acubeinfotech.ae/">Acube Infotech</a> for Sobha Constructions LLC
+    </div>
+</div>  

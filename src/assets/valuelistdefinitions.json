@@ -1,0 +1,45 @@
+{
+    "valuelistDefinitions": [{
+            "valuelistName": "LocationTypes",
+            "textFieldName": "displayText",
+            "valueFieldName": "value",
+            "APIUrlKey": "valuelist/valueasint/LocationTypes"
+        },
+        {
+            "valuelistName": "MaterialTypes",
+            "textFieldName": "displayText",
+            "valueFieldName": "value",
+            "APIUrlKey": "valuelist/valueasint/MaterialTypes"
+        },
+        {
+            "valuelistName": "Projects",
+            "textFieldName": "projectName",
+            "valueFieldName": "projectId",
+            "APIUrlKey": "project"
+        },
+        {
+            "valuelistName": "Locations",
+            "textFieldName": "locationName",
+            "valueFieldName": "locationId",
+            "APIUrlKey": "Location"
+        },
+        {
+            "valuelistName": "Materials",
+            "textFieldName": "materialCode",
+            "valueFieldName": "materialId",
+            "APIUrlKey": "Material"
+        },
+        {
+            "valuelistName": "InventoryStatus",
+            "textFieldName": "displayText",
+            "valueFieldName": "value",
+            "APIUrlKey": "valuelist/valueasint/InventoryStatus"
+        },
+        {
+            "valuelistName": "UserRole",
+            "textFieldName": "roleName",
+            "valueFieldName": "roleId",
+            "APIUrlKey": "userrole"
+        }
+    ]
+}
