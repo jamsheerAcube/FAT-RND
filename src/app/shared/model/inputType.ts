@@ -1,0 +1,1 @@
+export type inputType = 'textBox' | 'dropDown' | 'checkBox' | 'datePicker' | 'dateTimePicker' | 'textArea';

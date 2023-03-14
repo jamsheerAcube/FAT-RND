@@ -1,7 +1,20 @@
-<kendo-grid [data]="gridData">
-    <kendo-grid-column field="ProductID" title="ID"> </kendo-grid-column>
-    <kendo-grid-column field="ProductName" title="Name"> </kendo-grid-column>
-    <kendo-grid-column field="Category.CategoryName" title="Category">
+<kendo-grid [height]="height" [data]="data" [loading]="loading" [pageable]="{
+    buttonCount: buttonCount,
+    info: info,
+    type: type,
+    pageSizes: pageSizes,
+    previousNext: previousNext,
+    position: position
+  }" [pageSize]="state.take" [skip]="state.skip" [sortable]="true" [sort]="state.sort"  [filterable]="true" [filter]="state.filter" (dataStateChange)="dataStateChange($event)">
+    <!-- <kendo-grid-column field="customerID" [width]="130"></kendo-grid-column>
+    <kendo-grid-column field="contactName" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="address"></kendo-grid-column>
+    <kendo-grid-column field="companyName" [sortable]="false">
     </kendo-grid-column>
-    <kendo-grid-column field="UnitPrice" title="Price"> </kendo-grid-column>
+    <kendo-grid-column field="city" [sortable]="false">
+    </kendo-grid-column> -->
+
+    <kendo-grid-column *ngFor="let column of gridColumns" field="{{ column.fieldName }}" title="{{ column.label }}"
+        [width]="column.columnWidth" >
+    </kendo-grid-column>
 </kendo-grid>

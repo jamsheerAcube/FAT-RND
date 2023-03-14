@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IGridColumnDefenition } from 'src/app/service/models/gridColumnsDefenition';
+import { IGridColumnDefinition } from 'src/app/shared/model/gridColumnDefinition';
+import { InputControlBase } from 'src/app/shared/model/inputControlBase';
+
 import { IMasterService } from 'src/app/service/services/imaster.service';
+import { AlertService } from 'src/app/service/services/alert.service';
+import { State } from "@progress/kendo-data-query";
+import { PageChangeEvent, GridDataResult, DataStateChangeEvent, PagerPosition, PagerType } from "@progress/kendo-angular-grid";
 @Component({
   selector: 'app-single-row-crud-base',
   templateUrl: './single-row-crud-base.component.html',
@@ -10,14 +15,27 @@ export class SingleRowCrudBaseComponent<ModelType extends { key: any }> implemen
   pageType: string = '';
   displayName: string = '';
   displayHeader: string = '';
-  gridColumns: IGridColumnDefenition[] = [];
+  gridColumns: IGridColumnDefinition[] = [];
   gridData: ModelType[] = [];
+  public gridDatas: GridDataResult = { data: [], total: 0 };
   service!: IMasterService<ModelType>;
   refreshOnLoad: boolean = true;
   resetForm: boolean = false;
   loading: boolean = false;
   //Parent Data Keys For Data Filter
   defaultDataFilterValues: { [fieldName: string]: string } = {};
+  state: State = {
+    skip: 0,
+    take: 10,
+    group: [],
+    filter: { filters: [], logic: "and" },
+    sort: []
+  };
+  alert!: AlertService;
+  inputControls: InputControlBase[] = [];
+
+
+
   constructor() { }
 
   ngOnInit(): void {
@@ -29,13 +47,12 @@ export class SingleRowCrudBaseComponent<ModelType extends { key: any }> implemen
   }
   refreshGridData(filters: any) {
     filters = this.setDefaultFilter(filters);
-    this.resetForm = !this.resetForm;
     this.loading = true;
-    this.service.getAll(filters).subscribe({
+    this.service.getAll(this.state).subscribe({
       next: (value) => (this.gridData = value),
       error: (err) => {
         this.loading = false;
-        // this.alert.showError(err.message);
+        this.alert.showError(err.message);
       },
       complete: () => { this.loading = false; }
     });

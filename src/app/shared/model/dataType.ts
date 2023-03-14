@@ -1,0 +1,1 @@
+export type dataType = 'date' | 'dateTime' | 'number' | 'text' | 'boolean';

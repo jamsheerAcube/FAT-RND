@@ -27,6 +27,7 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
           return this._http.get<ModelType[]>(url + `\\filter`, { params })
             .pipe(tap((res) => {
               this._cachedData = res;
+              debugger;
               //console.log(this._cachedData);
             }));
         })
@@ -40,6 +41,7 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
           .pipe(
             tap((res) => {              
               this._cachedData = res;
+              debugger;
               //console.log(this._cachedData);
           }));
         })

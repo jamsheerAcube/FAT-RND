@@ -1,0 +1,8 @@
+<ng-template #itemListRef>
+    <app-dynamic-form [inputControls]="filterControls" [inputValues]="filterValues" [submitText]="'Refresh'" [raiseFormSubmit]="raiseFormSubmitEventflag" [resetForm]="resetFilterFormFlag" (formSubmit)="onFormSubmit($event)" (formReset)="onFormReset()">
+    </app-dynamic-form>
+</ng-template>
+<div class="example-wrapper">
+    <button style="margin-left: 2px;" kendoButton (click)="showConfirmation(itemListRef)" icon="filter" themeColor="secondary" title="Filters"></button>
+</div>
+<div kendoDialogContainer></div>

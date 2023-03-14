@@ -1,4 +1,4 @@
-<div class="display-header">{{ displayHeader }} -{{pageType}}</div>
+<div class="display-header">{{ displayHeader }}</div>
 
 <kendo-splitter orientation="vertical" style="height: 100%">
     <kendo-splitter-pane [resizable]="true" [collapsible]="true">
@@ -6,7 +6,7 @@
             <kendo-splitter-pane>
                 <div kendoTooltip>
                     <div style="margin: 5px; display: inline-flex">
-                  <app-back-navigate></app-back-navigate>
+                        <app-back-navigate></app-back-navigate>
                         <ng-container *ngIf="pageType==='grid'">
                             <button kendoButton style="margin-left: 2px" (click)="onRefreshClick()" icon="refresh"
                                 themeColor="primary" title="Refresh"></button>
@@ -22,22 +22,14 @@
                         </ng-container>
                     </div>
                 </div>
-
                 <div style="margin: 5px;">
-
-
-
-
                     <ng-container *ngIf="pageType==='grid'">
                         <app-grid [gridData]="gridData" [height]="gridHeight" [width]="gridWidth"
                             [gridColumns]="gridColumns"></app-grid>
                     </ng-container>
-
-
                     <ng-container *ngIf="pageType==='form'">
-                        form
+                        <app-dynamic-form [inputControls]="formControls"></app-dynamic-form>
                     </ng-container>
-
                 </div>
             </kendo-splitter-pane>
         </kendo-splitter>

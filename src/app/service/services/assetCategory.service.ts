@@ -7,6 +7,6 @@ import { MasterService } from './master.service';
 @Injectable({ providedIn: 'root' })
 export class assetCategoryService extends MasterService<IAssetCategory>{
   constructor(http: HttpClient, configs: ConfigService) {
-    super(http, configs, 'Location');
+    super(http, configs, 'AssetCategory/GetPage');
   }
 }
