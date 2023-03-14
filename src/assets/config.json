@@ -1,7 +1,7 @@
 {
     "appName": "FATWEBUI",
     "serverURLs": [
-        { "key": "baseUrl", "value": "http://acuberfid.fortiddns.com:4480/fatacubetestapi/fat" }
+        { "key": "baseUrl", "value": "http://acuberfid.fortiddns.com:4480/fatacubetestapi/fat/" }
 
     ],
     "appLogin": "/fatapp/login"

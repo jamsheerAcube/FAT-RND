@@ -34,7 +34,7 @@ export class AuthService {
           .post<AuthResponseData>(
             `${config.serverURLs.find(
               (x:any) => x.key === 'baseUrl'
-            )?.value}/user/authenticate`,
+            )?.value}user/authenticate`,
             {
               applicationID: config.appName,
               userName: userDetails.userName,

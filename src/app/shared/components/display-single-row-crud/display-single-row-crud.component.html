@@ -1,0 +1,45 @@
+<div class="display-header">{{ displayHeader }} -{{pageType}}</div>
+
+<kendo-splitter orientation="vertical" style="height: 100%">
+    <kendo-splitter-pane [resizable]="true" [collapsible]="true">
+        <kendo-splitter orientation="horizontal" style="height: 100%">
+            <kendo-splitter-pane>
+                <div kendoTooltip>
+                    <div style="margin: 5px; display: inline-flex">
+                  <app-back-navigate></app-back-navigate>
+                        <ng-container *ngIf="pageType==='grid'">
+                            <button kendoButton style="margin-left: 2px" (click)="onRefreshClick()" icon="refresh"
+                                themeColor="primary" title="Refresh"></button>
+                            <!-- <app-filter-dialog *ngIf="this.filterControls.length > 0" [filterControls]="filterControls"
+                                (formSubmit)="onFilterSubmit($event)" (formReset)="onFilterReset()"></app-filter-dialog> -->
+                            <button kendoButton style="margin-left: 2px" (click)="onExportToExcelClick()" icon="excel"
+                                title="Export to exccel"></button>
+                            <button kendoButton *ngIf="enableAdd" style="margin-left: 2px" (click)="onAddNewClick()"
+                                icon="add" themeColor="info" title="Create new"></button>
+                            <!-- <button kendoButton style="margin-left: 2px" *ngFor="let action of gridCustomHeaderButtons"
+                                (click)="onGridCustomerHeaderButtonClick(action.name)" icon="{{action.icon}}"
+                                [themeColor]="action.themeColor" title="{{ action.altText }}"></button> -->
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div style="margin: 5px;">
+
+
+
+
+                    <ng-container *ngIf="pageType==='grid'">
+                        <app-grid [gridData]="gridData" [height]="gridHeight" [width]="gridWidth"
+                            [gridColumns]="gridColumns"></app-grid>
+                    </ng-container>
+
+
+                    <ng-container *ngIf="pageType==='form'">
+                        form
+                    </ng-container>
+
+                </div>
+            </kendo-splitter-pane>
+        </kendo-splitter>
+    </kendo-splitter-pane>
+</kendo-splitter>

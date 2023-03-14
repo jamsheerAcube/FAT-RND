@@ -8,10 +8,23 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
 import { IconModule } from '@progress/kendo-angular-icons';
 import { LayoutModule } from '@progress/kendo-angular-layout';
+import { GridModule,ExcelModule  } from '@progress/kendo-angular-grid';
+import { TooltipsModule } from '@progress/kendo-angular-tooltip';
+
+import { SingleRowCrudBaseComponent } from './components/single-row-crud-base/single-row-crud-base.component';
+import { DisplaySingleRowCrudComponent } from './components/display-single-row-crud/display-single-row-crud.component';
+import { GridComponent } from './components/grid/grid.component';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { BackNavigateComponent } from './components/back-navigate/back-navigate.component';
 @NgModule({
   declarations: [
     AppbarComponent,
-    MainmenuComponent
+    MainmenuComponent,
+    SingleRowCrudBaseComponent,
+    DisplaySingleRowCrudComponent,
+    GridComponent,
+    DynamicFormComponent,
+    BackNavigateComponent
   ],
   imports: [
     HttpClientModule,
@@ -19,7 +32,8 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     ButtonsModule,
     NavigationModule,
     IconModule,
-    LayoutModule
+    LayoutModule,
+    GridModule,ExcelModule ,TooltipsModule
     
   ],  
   exports: [
@@ -27,7 +41,9 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     MainmenuComponent,
     ButtonsModule,
     IconModule,
-    LayoutModule
+    LayoutModule,
+    TooltipsModule,
+    DisplaySingleRowCrudComponent
   ]
 })
 export class SharedModule { }

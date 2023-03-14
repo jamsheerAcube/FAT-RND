@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://acuberfid.fortiddns.com:4480/fatacubetestapi/fat',
+  apiUrl:'http://acuberfid.fortiddns.com:4480/fatacubetestapi/fat/',
   appName: 'WEBAPP'
 };
 

@@ -1,0 +1,19 @@
+.grid-container {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.filter-pane {
+    max-height: fit-content;
+}
+
+.display-header {
+    /* background-color: white;
+    color: black; */
+    font-size: 18px;
+    padding: 10px 8px;
+    border-bottom: 1px solid #DCAD21;
+    display: flex;
+    align-items: center;
+}
