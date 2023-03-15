@@ -1,5 +1,14 @@
 {
-    "valuelistDefinitions": [{
+    "valuelistDefinitions": [
+        {
+            "valuelistName": "CategoryDepreciationPeriod",
+            "textFieldName": "displayText",
+            "valueFieldName": "value"
+        },
+        
+        
+        
+        {
             "valuelistName": "LocationTypes",
             "textFieldName": "displayText",
             "valueFieldName": "value",

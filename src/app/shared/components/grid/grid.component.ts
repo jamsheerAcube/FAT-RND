@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input ,SimpleChanges,Output,EventEmitter} from '@angular/core';
 import { IGridColumnDefinition } from 'src/app/shared/model/gridColumnDefinition';
+import { gridActionDefinition } from 'src/app/shared/model/gridActionDefinition';
 import { Observable } from "rxjs";
 import { DataService } from "src/app/service/services/data.service";
 import { State } from "@progress/kendo-data-query";
@@ -17,9 +18,12 @@ import {
 })
 export class GridComponent implements OnInit {
   @Input() public gridColumns: IGridColumnDefinition[] = [];
-  @Input() public gridData: {}[] = [];
+  @Input() public gridActions: gridActionDefinition[] = [];
+  @Input() public gridDetails: any;
   @Input() public height: number = 500;
   @Input() public width: number = 900;
+  @Output() public gridRowAction: EventEmitter<any> = new EventEmitter<any>();
+  actionColumnWidth = 80;
   public state: State = {
     skip: 0,
     take: 10,
@@ -42,18 +46,43 @@ export class GridComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setActionColumnWidth();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.gridDetails){
+      debugger;
+      this.data = { data: this.gridDetails.data, total: this.gridDetails.total };
+    }
+
+  }
+  setActionColumnWidth() {
+    if (this.gridActions) {
+      if (this.gridActions.length == 4) {
+        this.actionColumnWidth = 160;
+      }
+      else {
+        this.actionColumnWidth = 80;
+      }
+    }
+    else {
+      this.actionColumnWidth = 80;
+    }
+  }
+  onActionClick(actionName: string, eventInfo: any) {
+    debugger;
+    this.gridRowAction.emit({ actionName, row: eventInfo });
   }
   public dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.sendRequest(state);
+    // this.sendRequest(state);
   }
 
-  public sendRequest(state: State): void {
-    this.loading = true;
-    this.service.fetch(state).subscribe((response: GridDataResult) => {
-      this.data = response;
-      this.loading = false;
-      debugger;
-    });
-  }
+  // public sendRequest(state: State): void {
+  //   this.loading = true;
+  //   this.service.fetch(state).subscribe((response: GridDataResult) => {
+  //     this.data = response;
+  //     this.loading = false;
+  //     debugger;
+  //   });
+  // }
 }

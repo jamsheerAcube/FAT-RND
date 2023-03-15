@@ -9,17 +9,18 @@ export interface InputControlBase {
     sortOrder: number,
     dataType: dataType,
     inputType: inputType,
+    inputFormat?:string,
     readonly?:boolean,
     required?:boolean,    
     defaultValue?:string,
     
-    showOnForm?: string,
-    mandatoryOnForm?:string,
+    showOnFormCondition?: string,
+    mandatoryOnFormCondition?:string,
     show?: boolean
-
-    
 
     valueListName?: string,
     valueListItems?: any,
     valueListDefinition?: IValueListDefinition
+
+    groupName?:string;
 }

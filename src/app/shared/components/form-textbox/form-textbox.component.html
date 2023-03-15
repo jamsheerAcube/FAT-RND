@@ -1,0 +1,7 @@
+<kendo-formfield [formGroup]="form">
+    <kendo-label class="k-form" [for]="inputControlSetting.fieldName" [text]=inputControlSetting.label> </kendo-label>
+    <kendo-textbox [style.width]="'100%'" formControlName={{inputControlSetting.fieldName}}
+        [clearButton]="true"></kendo-textbox>
+    <kendo-formhint>{{inputControlSetting.hint}}</kendo-formhint>
+    <kendo-formerror>Error: {{inputControlSetting.label}} is required</kendo-formerror>
+</kendo-formfield>

@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DrawerItem, DrawerItemExpandedFn, DrawerSelectEvent } from '@progress/kendo-angular-layout';
+import { DrawerItemX } from '../../model/idrawerItem.model';
 @Component({
   selector: 'app-mainmenu',
   templateUrl: './mainmenu.component.html',
@@ -17,35 +18,19 @@ export class MainmenuComponent implements OnInit {
     }
   }
   public selected = 'Dashbord';
-  public menuItems: Array<any> = [
-    {
-      text: 'Dashbord',
-      icon: 'k-i-inbox',
-      selected: true,
-      path: "/dashbord",
-      id: 0
-    },
 
-    {
-      text: 'Asset Attributes',
-      icon: 'k-i-calendar',
-      id: 3,
-    },
-    {
-      text: 'Asset Category',
-      icon: 'k-i-bell',
-      id: 2,
-      parentId: 3,
-      path: "/masters/assetcategory",
-    },
-    {
-      text: 'Product Master',
-      icon: 'k-i-edit',
-      id: 4,
-      parentId: 3,
-      path: "/masters/productmaster",
+  public _menuItems: DrawerItemX[] = [];
+
+  @Input() set menuItems(value: DrawerItemX[]) {
+    if (this._menuItems != value) {
+      this._menuItems = value;
     }
-  ];
+  }
+
+  get menuItems(): DrawerItemX[] {
+    return this._menuItems;
+  }
+
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   public isItemExpanded: DrawerItemExpandedFn = (item): boolean => {

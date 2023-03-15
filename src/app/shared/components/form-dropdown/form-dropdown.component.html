@@ -1,0 +1,8 @@
+<kendo-formfield [formGroup]="form">
+    <kendo-label [for]="inputControlSetting.fieldName" text={{labelText}}></kendo-label>
+    <kendo-combobox formControlName="{{ inputControlSetting.fieldName }}" [data]="listData" textField="{{valueListDef?.textFieldName}}" valueField="{{valueListDef?.valueFieldName}}" [valuePrimitive]="true" [filterable]="true" (filterChange)="handleFilter($event)"
+        (valueChange)="onValueChange($event)" (selectionChange)="onSelectionChange($event)">
+    </kendo-combobox>
+    <kendo-formhint>{{ inputControlSetting.hint }}</kendo-formhint>
+    <kendo-formerror>Error: {{ inputControlSetting.label }} is required</kendo-formerror>
+</kendo-formfield>

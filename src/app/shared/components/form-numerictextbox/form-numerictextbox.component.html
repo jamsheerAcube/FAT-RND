@@ -1,0 +1,9 @@
+
+<kendo-formfield [formGroup]="form">
+    <kendo-label [for]="inputControlSetting.fieldName" text={{labelText}}></kendo-label>
+    <kendo-numerictextbox [format]="inputControlSetting.inputFormat"
+    formControlName={{inputControlSetting.fieldName}} [autoCorrect]="autoCorrect">
+    </kendo-numerictextbox>
+    <kendo-formhint>{{inputControlSetting.hint}}</kendo-formhint>
+    <kendo-formerror>Error: {{inputControlSetting.label}} is required</kendo-formerror>
+</kendo-formfield>

@@ -1,2 +1,2 @@
-<app-display-single-row-crud [displayName]="displayName" displayHeader="{{ displayHeader }}" pageType="{{pageType}}"
-    [gridColumns]="gridColumns" [gridData]="gridData"  [inputControls]="inputControls"></app-display-single-row-crud>
+<app-display-single-row-crud [displayName]="displayName" displayHeader="{{ displayHeader }}" pageType="{{pageType}}"  [resetForm]="resetForm"
+[fieldDefinitions]="fields" [gridDetails]="gridDetails" [gridActions]="gridActions" (displayFormSubmit)="onDisplayFormAction($event)"></app-display-single-row-crud>

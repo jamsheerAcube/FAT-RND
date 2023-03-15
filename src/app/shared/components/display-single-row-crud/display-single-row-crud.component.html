@@ -6,7 +6,10 @@
             <kendo-splitter-pane>
                 <div kendoTooltip>
                     <div style="margin: 5px; display: inline-flex">
-                        <app-back-navigate></app-back-navigate>
+                        <app-back-navigate *ngIf="pageType==='grid'"></app-back-navigate>
+                        <button *ngIf="pageType==='form'" style="margin-right: 2px" kendoButton
+                            (click)="pageType='grid'" icon="arrow-60-left" themeColor="secondary" title="Back"></button>
+
                         <ng-container *ngIf="pageType==='grid'">
                             <button kendoButton style="margin-left: 2px" (click)="onRefreshClick()" icon="refresh"
                                 themeColor="primary" title="Refresh"></button>
@@ -24,14 +27,19 @@
                 </div>
                 <div style="margin: 5px;">
                     <ng-container *ngIf="pageType==='grid'">
-                        <app-grid [gridData]="gridData" [height]="gridHeight" [width]="gridWidth"
-                            [gridColumns]="gridColumns"></app-grid>
+                        <app-grid [gridDetails]="gridDetails" [height]="gridHeight" [width]="gridWidth"
+                            [gridColumns]="gridColumns" [gridActions]="gridActions"  (gridRowAction)="onGridRowAction($event)"></app-grid>
                     </ng-container>
                     <ng-container *ngIf="pageType==='form'">
-                        <app-dynamic-form [inputControls]="formControls"></app-dynamic-form>
+                        <div>
+                            <app-dynamic-form [inputControls]="formControls" [resetForm]="resetForm"
+                                [actionButtons]="formActionButtons"
+                                (formActionClick)="onFormActionClick($event)"></app-dynamic-form>
+                        </div>
                     </ng-container>
                 </div>
             </kendo-splitter-pane>
         </kendo-splitter>
     </kendo-splitter-pane>
 </kendo-splitter>
+<app-delete-dialog [showDelete]="showDeleteDialog" (dialogResult)="onDeleteDialogResult($event)"  (close)="onClose()"></app-delete-dialog>

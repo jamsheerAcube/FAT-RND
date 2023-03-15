@@ -1,9 +1,33 @@
-<p>dynamic-form works!</p>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="">
+        <div class="flex-container">
+            <div class="groupcolumns" *ngFor="let item of formfeilds | keyvalue">
+                <div [ngClass]="{
+                        'input-control-horizontal': controlAlignment === 'horizontal',
+                        'input-control-vertical': controlAlignment === 'vertical'
+                      }" *ngFor="let inputControl of item.value;let i=index;trackBy: inputControlTrack">
 
+                    <div *ngIf="inputControl.show == true" [ngSwitch]="inputControl.inputType">
+                        <app-form-textbox *ngSwitchCase="'textBox'" [form]="form" [inputControlSetting]="inputControl">
+                        </app-form-textbox>
 
-{{inputControls | json}}
+                        <app-form-numerictextbox *ngSwitchCase="'numericTextBox'" [form]="form"
+                            [inputControlSetting]="inputControl"></app-form-numerictextbox>
 
-<!-- <form (ngSubmit)="onSubmit()" [formGroup]="form">
-
-
-</form> -->
+                        <app-form-dropdown *ngSwitchCase="'dropDown'" [form]="form" [inputControlSetting]="inputControl"
+                            [listItems]="inputControl.valueListItems" [valueListDef]="inputControl.valueListDefinition"
+                            (valueChange)="onValueChange($event)" (selectionChange)="onSelectionChange($event)">
+                        </app-form-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <kendo-buttongroup>
+            <button type="button" kendoButton
+                *ngFor="let action of actionButtons;index as i;trackBy: actionButtonsTrack" icon="{{ action.icon }}"
+                [themeColor]="action.themeColor" (click)="onActionButtonClick(action.name)">
+                {{ action.text }}
+            </button>
+        </kendo-buttongroup>
+    </div>
+</form>

@@ -1,0 +1,8 @@
+
+<div style="height: 100%;">
+    <div kendoWindowContainer></div>
+    <app-appbar (menuTogglePressed)="menuTogglePressed($event)" (LogoutPressed)="onLogoutPressed()"></app-appbar>
+    <app-mainmenu [expanded]="expanded" [menuItems]="mainMenus">
+        <router-outlet></router-outlet>
+    </app-mainmenu>
+</div>

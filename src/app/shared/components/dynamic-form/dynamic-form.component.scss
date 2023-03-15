@@ -1,0 +1,38 @@
+.input-container-horizontal {
+    display: flex;
+    flex-direction: row;
+    min-width: 350px;
+}
+
+.input-control-horizontal {
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+.input-container-vertical {
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+
+}
+
+.input-control-vertical {
+    /* display: inline-block; */
+    /* min-height: 70px; */
+    margin: 10px 0px;
+}
+
+.flex-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.flex-container .groupcolumns {
+    align-self: left;
+    width: 100%;
+    margin: 0px;
+}
+
+.formfeild {
+    margin: 10px 0px;
+}

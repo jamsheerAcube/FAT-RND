@@ -21,9 +21,9 @@ export class AssetCategoryFormComponent extends SingleRowCrudBaseComponent<IAsse
     this.pageType = 'form';
     this.displayName = 'AssetCategory';
     this.displayHeader = 'Asset Category';
-    this.inputControls = [
-      { fieldName: "categoryCode", label: "Category Code", sortOrder: 1, dataType: "text", inputType: "textBox", required: true },
-      { fieldName: "categoryName", label: "Category Name", sortOrder: 2, dataType: "text", inputType: "textBox", required: true }
-    ]
+    // this.inputControls = [
+    //   { fieldName: "categoryCode", label: "Category Code", sortOrder: 1, dataType: "text", inputType: "textBox", required: true,show:true },
+    //   { fieldName: "categoryName", label: "Category Name", sortOrder: 2, dataType: "text", inputType: "textBox", required: true ,show:true }
+    // ]
   }
 }

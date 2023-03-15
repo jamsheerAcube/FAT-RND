@@ -39,6 +39,8 @@ export class ValuelistDefinitionService {
         }));
     }
 
+
+
     getValueListItems(VLDefinition: IValueListDefinition) {
         //console.log(VLDefinition);
         if (VLDefinition.APIUrlKey) {
@@ -46,6 +48,13 @@ export class ValuelistDefinitionService {
                 mergeMap((valueListURL) => {
                     return this.http.get(valueListURL);
                 }));
+        }
+        else if (VLDefinition.valuelistName === "CategoryDepreciationPeriod") {
+            return of([
+                { displayText: "Year", value: 7 },
+                { displayText: "Month", value: 3 },
+                { displayText: "Day", value: 1 },
+            ]);
         }
         else {
             //Return empty object

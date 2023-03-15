@@ -15,6 +15,7 @@ export interface IFieldDefinition {
     mandatoryOnForm?: boolean, //Wil consider false as default
     showOnFormCondition?: string,
     mandatoryOnFormCondition?:string,
+    inputFormat?:string;
 
     //Related to Filter Panel
     showAsFilter?: boolean, //Wil consider false as default

@@ -5,16 +5,21 @@
     pageSizes: pageSizes,
     previousNext: previousNext,
     position: position
-  }" [pageSize]="state.take" [skip]="state.skip" [sortable]="true" [sort]="state.sort"  [filterable]="true" [filter]="state.filter" (dataStateChange)="dataStateChange($event)">
-    <!-- <kendo-grid-column field="customerID" [width]="130"></kendo-grid-column>
-    <kendo-grid-column field="contactName" [width]="200"></kendo-grid-column>
-    <kendo-grid-column field="address"></kendo-grid-column>
-    <kendo-grid-column field="companyName" [sortable]="false">
-    </kendo-grid-column>
-    <kendo-grid-column field="city" [sortable]="false">
-    </kendo-grid-column> -->
+  }" [pageSize]="state.take" [skip]="state.skip" [sortable]="true" [sort]="state.sort" [filterable]="true"
+  [filter]="state.filter" (dataStateChange)="dataStateChange($event)">
+  <kendo-grid-column *ngFor="let column of gridColumns" field="{{ column.fieldName }}" title="{{ column.label }}"
+    [width]="column.columnWidth">
+  </kendo-grid-column>
 
-    <kendo-grid-column *ngFor="let column of gridColumns" field="{{ column.fieldName }}" title="{{ column.label }}"
-        [width]="column.columnWidth" >
-    </kendo-grid-column>
+  <kendo-grid-column *ngIf="gridActions.length > 0" title="Actions" [width]="actionColumnWidth">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <div kendoTooltip>
+        <kendo-buttongroup>
+          <button kendoButton *ngFor="let action of gridActions" (click)="onActionClick(action.name, dataItem)"
+            icon="{{ action.icon }}" [themeColor]="action.themeColor" title="{{ action.altText }}"></button>
+        </kendo-buttongroup>
+      </div>
+    </ng-template>
+  </kendo-grid-column>
+
 </kendo-grid>

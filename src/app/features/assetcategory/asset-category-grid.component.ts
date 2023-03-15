@@ -21,20 +21,41 @@ export class AssetCategoryGridComponent extends SingleRowCrudBaseComponent<IAsse
     this.pageType = 'grid';
     this.displayName = 'AssetCategory';
     this.displayHeader = 'Asset Category';
-    this.gridColumns = [
+    this.fields = [
       {
-        fieldName: 'assetCategoryCode',
-        label: 'Asset Category Code',
-        columnWidth: 200,
-        dataType:"text"
+        fieldName: 'assetCategoryCode', dataType: 'text',
+        // hint: 'max 50 chars', 
+        label: 'Category Code',
+        sortOrder: 1, inputType: 'textBox', mandatoryOnForm: true,
+        showAsFilter: true
       },
       {
-        fieldName: 'assetCategoryName',
-        label: 'Asset Category Name',
-        columnWidth: 200,
-        dataType:"text"
+        fieldName: 'assetCategoryName', dataType: 'text',
+        label: 'Category Name',
+        sortOrder: 2, inputType: 'textBox',
+        mandatoryOnForm: true, showAsFilter: true
       },
-
+      {
+        fieldName: 'assetCategoryShortCode', dataType: 'text',
+        label: 'Category Short Code',
+        sortOrder: 3, inputType: 'textBox',
+        mandatoryOnForm: true, showAsFilter: true
+      },
+      {
+        fieldName: 'categoryDepreciationPeriod', dataType: 'text',
+        label: 'Depreciation Period',
+        sortOrder: 4, inputType: 'dropDown',valueListName: 'CategoryDepreciationPeriod',
+        mandatoryOnForm: true, showAsFilter: true,
+      },
+      {
+        fieldName: 'categoryDepreciationPercent', dataType: 'text',
+        label: 'Depreciation Percentage',
+        sortOrder: 5, inputType: 'numericTextBox',inputFormat:"n0",
+        mandatoryOnForm: true, showAsFilter: true
+      },
     ];
+
+
   }
 }
+

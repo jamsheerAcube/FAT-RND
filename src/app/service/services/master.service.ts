@@ -18,7 +18,7 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
     this._resourceType = resourceType;
   }
 
-  getAll(filters?: any): Observable<ModelType[]> {    
+  getAll2(filters?: any): Observable<ModelType[]> {    
     let params: HttpParams = prepareHttpParams(filters);
 
     if (params.keys().length > 0) {
@@ -36,6 +36,7 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
     else {
       return this._configs.getServerURL(this._resourceType).pipe(
         mergeMap((url) => {
+          debugger;
           //console.log(url);
           return this._http.get<ModelType[]>(url+this.getMethodUrl)
           .pipe(
@@ -49,15 +50,47 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
     }
   }
 
+  getAll(filters?: any): Observable<ModelType[]> {    
+    let params: HttpParams = prepareHttpParams(filters);
+    if (params.keys().length > 0) {
+      return this._configs.getServerURL(this._resourceType).pipe(
+        mergeMap((url) => {
+          return this._http.get<ModelType[]>(url+ '/GetPage', { params })
+            .pipe(tap((res) => {
+              this._cachedData = res;
+              //console.log(this._cachedData);
+            }));
+        })
+      );
+    }
+    else {
+      debugger;
+      return this._configs.getServerURL(this._resourceType).pipe(
+        mergeMap((url) => {
+          debugger;
+          //console.log(url);
+          return this._http.get<ModelType[]>(url+this.getMethodUrl)
+          .pipe(
+            tap((res) => {              
+              this._cachedData = res;
+              debugger;
+              //console.log(this._cachedData);
+          }));
+        })
+      );
+    }
+  }
   cachedData(): ModelType[] {
     return this._cachedData;
   }
 
   post(createDTO: any) : Observable<ModelType> {
+    debugger;
     return this._configs.getServerURL(this._resourceType).pipe(
       mergeMap((url) => {
         return this._http.post<any>(url, createDTO)
           .pipe(mergeMap((x) => {
+            debugger;
             //console.log(`Retrieving the newly created resource from server using the response body:` , x);
             return this._http.get<ModelType>(url + `/${x.key}`);
           }))
