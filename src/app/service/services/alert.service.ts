@@ -16,7 +16,6 @@ export class AlertService {
     }
 
     showError(message: string) {
-        debugger;
         this.notificationService.show({
             content: message,
             type: { icon: true, style: 'error' },

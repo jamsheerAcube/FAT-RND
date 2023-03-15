@@ -48,7 +48,6 @@ export class DeleteDialogComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     //console.log(changes);
-    debugger;
     if (changes['showDelete'] && !changes['showDelete'].firstChange
       && changes['showDelete'].currentValue != changes['showDelete'].previousValue
       && changes['showDelete'].currentValue == true

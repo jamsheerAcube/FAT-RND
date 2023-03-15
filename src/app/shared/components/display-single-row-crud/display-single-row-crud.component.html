@@ -33,7 +33,7 @@
                     <ng-container *ngIf="pageType==='form'">
                         <div>
                             <app-dynamic-form [inputControls]="formControls" [resetForm]="resetForm"
-                                [actionButtons]="formActionButtons"
+                                [actionButtons]="formActionButtons" [inputValues]="formInputValues"
                                 (formActionClick)="onFormActionClick($event)"></app-dynamic-form>
                         </div>
                     </ng-container>
@@ -42,4 +42,4 @@
         </kendo-splitter>
     </kendo-splitter-pane>
 </kendo-splitter>
-<app-delete-dialog [showDelete]="showDeleteDialog" (dialogResult)="onDeleteDialogResult($event)"  (close)="onClose()"></app-delete-dialog>
+<app-delete-dialog [showDelete]="showDeleteDialog" (dialogResult)="onDeleteDialogResult($event)" ></app-delete-dialog>

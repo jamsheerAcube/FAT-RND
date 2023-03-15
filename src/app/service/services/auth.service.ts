@@ -47,7 +47,6 @@ export class AuthService {
                 `AuthResponseData from server:${JSON.stringify(res)}`
               ); */
 
-              debugger;
               localStorage.setItem('access_token', res.token);
               localStorage.setItem('userName', res.userName);
               this.startRefreshTokenTimer();

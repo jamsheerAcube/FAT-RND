@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { gridColumnDefinition, IGridColumnDefinition } from 'src/app/shared/model/gridColumnDefinition';
 import { gridActionDefinition } from 'src/app/shared/model/gridActionDefinition';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -30,7 +30,7 @@ export class DisplaySingleRowCrudComponent implements OnInit {
   gridColumns: IGridColumnDefinition[] = [];
   formActionButtons: IButtonActionDefinition[] = [];
   formInputValues: any;
-
+  tempEditRowValues: any;
   innerHeight: any;
   gridHeight: any;
   innerWidth: any;
@@ -90,9 +90,9 @@ export class DisplaySingleRowCrudComponent implements OnInit {
       this.clearInputForm();
     } else if (actionInfo.actionName == "Edit") {
       //here form data has precedence
-      // let merged = { ...this.formInputValues, ...actionInfo.formData };
-      // this.displayFormSubmit.emit(
-      //   { actionName: actionInfo.actionName, formData: merged });
+      let merged = { ...this.formInputValues, ...actionInfo.formData };
+      this.displayFormSubmit.emit(
+        { actionName: actionInfo.actionName, formData: merged });
     } else if (actionInfo.actionName == "Add") {
       this.displayFormSubmit.emit(
         { actionName: actionInfo.actionName, formData: actionInfo.formData });
@@ -100,24 +100,21 @@ export class DisplaySingleRowCrudComponent implements OnInit {
   }
 
   clearInputForm() {
-    debugger;
     this.formInputValues = this.formControls
       .reduce((acc, cur) => ({ ...acc, [cur.fieldName]: cur.defaultValue ?? '' }), {});
-    debugger;
   }
   onGridRowAction(actionInfo: { actionName: string, row: any }) {
-    debugger;
-    this.formInputValues = actionInfo.row;
     if (actionInfo.actionName == "Edit") {
-      this.router.navigateByUrl('/home/locations/edit/' + this.formInputValues.key);
+      this.pageType = 'form'
+      this.formInputValues = actionInfo.row;
+      this.formActionButtons = [
+        { name: 'Edit', text: 'Edit', icon: 'edit', themeColor: 'success' },
+        { name: 'Clear', text: 'Clear', icon: 'clear', themeColor: 'secondary' }
+      ];
     }
     else if (actionInfo.actionName == "Delete") {
       this.tempDeleteRowValues = actionInfo.row;
-      // this.clearInputForm();
-      // this.formActionButtons = [];
-      //Display the Delete dialog window
       this.showDeleteDialog = true;
-      debugger;
     }
     else {
       this.formActionButtons = [];
@@ -125,10 +122,7 @@ export class DisplaySingleRowCrudComponent implements OnInit {
         { actionName: actionInfo.actionName, actionData: actionInfo.row })
     }
   }
-  onClose(){
-    debugger
-  }
-  
+
   onDeleteDialogResult(result: string) {
     this.showDeleteDialog = false;
     //console.log(`Delete dialog result`, result);

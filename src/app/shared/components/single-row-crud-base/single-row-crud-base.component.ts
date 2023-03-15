@@ -61,12 +61,10 @@ export class SingleRowCrudBaseComponent<ModelType extends { key: any }> implemen
       PageSize: 10,
       IncludeDeleted: false
     }
-    debugger;
     this.service.getAll(data).subscribe({
       next: (value) => {
         this.gridDetails = value;
         this.gridData= this.gridDetails.data
-        debugger;
       },
       error: (err) => {
         this.loading = false;
@@ -92,13 +90,10 @@ export class SingleRowCrudBaseComponent<ModelType extends { key: any }> implemen
   }
   onDisplayFormAction(actionInfo: { actionName: string, formData: any }) {
     //console.log('onDisplayFormAction', actionInfo);
-    debugger
     actionInfo.formData = this.setDefaultFormValues(actionInfo.formData);
-    debugger
     if (actionInfo.actionName == "Add") {
       this.service.post(actionInfo.formData).subscribe({
         next: (value) => {
-          debugger;
           this.gridData = [...this.gridData, value];
         },
         error: (err) => {
@@ -128,7 +123,6 @@ export class SingleRowCrudBaseComponent<ModelType extends { key: any }> implemen
       this.service.delete(actionInfo.formData.key).subscribe({
         next: (value) => {
           this.gridData = [...this.gridData.filter(x => x.key != actionInfo.formData.key)];
-          debugger;
         },
         error: (err) => {
           this.alert.showError(err.message)

@@ -50,7 +50,6 @@ export class GridComponent implements OnInit {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if(this.gridDetails){
-      debugger;
       this.data = { data: this.gridDetails.data, total: this.gridDetails.total };
     }
 
@@ -69,7 +68,6 @@ export class GridComponent implements OnInit {
     }
   }
   onActionClick(actionName: string, eventInfo: any) {
-    debugger;
     this.gridRowAction.emit({ actionName, row: eventInfo });
   }
   public dataStateChange(state: DataStateChangeEvent): void {
@@ -82,7 +80,6 @@ export class GridComponent implements OnInit {
   //   this.service.fetch(state).subscribe((response: GridDataResult) => {
   //     this.data = response;
   //     this.loading = false;
-  //     debugger;
   //   });
   // }
 }

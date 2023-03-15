@@ -27,7 +27,6 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
           return this._http.get<ModelType[]>(url + `\\filter`, { params })
             .pipe(tap((res) => {
               this._cachedData = res;
-              debugger;
               //console.log(this._cachedData);
             }));
         })
@@ -36,13 +35,11 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
     else {
       return this._configs.getServerURL(this._resourceType).pipe(
         mergeMap((url) => {
-          debugger;
           //console.log(url);
           return this._http.get<ModelType[]>(url+this.getMethodUrl)
           .pipe(
             tap((res) => {              
               this._cachedData = res;
-              debugger;
               //console.log(this._cachedData);
           }));
         })
@@ -64,16 +61,13 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
       );
     }
     else {
-      debugger;
       return this._configs.getServerURL(this._resourceType).pipe(
         mergeMap((url) => {
-          debugger;
           //console.log(url);
           return this._http.get<ModelType[]>(url+this.getMethodUrl)
           .pipe(
             tap((res) => {              
               this._cachedData = res;
-              debugger;
               //console.log(this._cachedData);
           }));
         })
@@ -85,12 +79,10 @@ export abstract class MasterService<ModelType> implements IMasterService<ModelTy
   }
 
   post(createDTO: any) : Observable<ModelType> {
-    debugger;
     return this._configs.getServerURL(this._resourceType).pipe(
       mergeMap((url) => {
         return this._http.post<any>(url, createDTO)
           .pipe(mergeMap((x) => {
-            debugger;
             //console.log(`Retrieving the newly created resource from server using the response body:` , x);
             return this._http.get<ModelType>(url + `/${x.key}`);
           }))

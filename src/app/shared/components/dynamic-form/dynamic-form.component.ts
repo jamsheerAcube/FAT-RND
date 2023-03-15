@@ -17,14 +17,26 @@ export class DynamicFormComponent implements OnInit {
   @Output() formReset: EventEmitter<any> = new EventEmitter<any>();
   form!: FormGroup;
   formfeilds: any[] = []
+
+  private _inputValues: { [key: string]: any; } = {};
+  @Input() public set inputValues(value: { [key: string]: any; }) {
+    let oldValues = this._inputValues;
+    this._inputValues = value;  
+    this.setInputValuesToForm();
+    // this.validateInputValuesChange(oldValues, this._inputValues);
+  }
+  public get inputValues(): { [key: string]: any; } {
+    return this._inputValues;
+  }
+
   constructor(private _valueListService: ValuelistDefinitionService) { }
 
   ngOnInit(): void {
     this.form = this.getFormgroup();
+    this.setInputValuesToForm();
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    debugger;
     //console.log(changes);
     if (changes['raiseFormSubmit'] && !changes['raiseFormSubmit'].firstChange
       && changes['raiseFormSubmit'].currentValue != changes['raiseFormSubmit'].previousValue) {
@@ -119,7 +131,6 @@ export class DynamicFormComponent implements OnInit {
     }
   }
   onSubmit() {
-    debugger;
     // this.payLoad = this.form.getRawValue();
     // this.formSubmit.emit(this.payLoad);
   }
@@ -130,5 +141,53 @@ export class DynamicFormComponent implements OnInit {
   onSelectionChange(value: any): void {
     //console.log("selectionChange", value);
     //this.selectionChange.emit(value);
+  }
+  setInputValuesToForm() {
+    if (this.form)
+      this.form.patchValue(this._inputValues);
+  }
+  validateInputValuesChange(prevValues: any, currentValues: any) {
+    //Here we need to detect all the changed values...
+    //and if value change need some other controls visiblity change, execute those logic
+    let allConditionalControls = this.inputControls.filter(x => x.showOnFormCondition);
+    this.setVisibility(allConditionalControls);
+  }
+  setVisibility(dependents: InputControlBase[]) {
+    if (!this.form)
+      return;
+
+    let formValues = this.form.getRawValue();
+
+    if (dependents && dependents.length > 0) {
+      dependents.forEach(element => {
+        let result = this.evaluateCondition(element.showOnFormCondition ?? "", formValues);
+        element.show = result;
+        this.form.get(element.fieldName)?.clearValidators();
+        if (result) {
+          this.form.get(element.fieldName)?.addValidators(Validators.required);
+        }
+      });
+    }
+  }
+  evaluateCondition(expression: string, formValues: any): boolean {
+    let variables: string[] = this.getVariables(expression);
+    variables.forEach(element => {
+      let val = formValues[element];
+      if (!val)
+        val = "\'\'";
+      expression = expression.replace(`[${element}]`, val);
+    });
+    return Function("return " + expression)();
+  }
+
+  getVariables(expression: string): string[] {
+    let variables: string[] = [];
+    let part1: string[] = expression.split('[');
+    part1.forEach(element => {
+      let temp = element.split(']')[0];
+      if (!variables.includes(temp))
+        variables.push(temp);
+    });
+    return variables;
   }
 }
